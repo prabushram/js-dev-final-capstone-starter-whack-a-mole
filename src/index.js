@@ -100,7 +100,13 @@ const index = randomInteger(0, holes.length - 1);
 */
 function gameOver() {
   // TODO: Write your code here
-  
+   if (time > 0) {
+    const timeoutId = showUp();
+    return timeoutId;
+  } else {
+    const gameStopped = stopGame();
+    return gameStopped;
+  }     
 }
 
 /**
@@ -268,12 +274,12 @@ function stopGame(){
  * Note: Simply uncommenting `setDuration(10);` and `showUp();` is not enough. To make the game work, ensure all necessary functions listed above are called to initialize the score, timer, event listeners, and mole appearances. 
 */
 function startGame(){
-  //clearScore();
-  //stopGame();   //optional
-  //setDuration(10);
-  //setEventListeners();
-  //startTimer();
-  //showUp();
+  clearScore();
+  stopGame();   //optional
+  setDuration(10);
+  setEventListeners();
+  startTimer();
+  showUp();
   return "game started";
 }
 
