@@ -4,6 +4,9 @@ const startButton = document.querySelector('#start');
 // TODO: Add the missing query selectors:
 const score = document.querySelector('#score');// Use querySelector() to get the score element
 const timerDisplay = document.querySelector('#timer'); // use querySelector() to get the timer element.
+const difficultyRadios = document.querySelectorAll('input[name="difficulty"]');
+const song = new Audio('./assets/molesong.mp3');
+const song2 = new Audio('./assets/hit.mp3');
 
 let time = 0;
 let timer;
@@ -227,6 +230,7 @@ function startTimer() {
 function whack(event) {
   // TODO: Write your code here.
   // call updateScore()
+  playAudio2();
   updateScore();
   return points;
 }
@@ -263,6 +267,8 @@ function setDuration(duration) {
 */
 function stopGame(){
   // stopAudio(song);  //optional
+  stopAudio(song);  //optional
+  stopAudio(song2);  //optional
   clearInterval(timer);
   return "game stopped";
 }
@@ -286,6 +292,7 @@ function stopGame(){
 function startGame(){
   clearScore();
   stopGame();   //optional
+  playAudio();
   setDuration(10);
   setEventListeners();
   startTimer();
@@ -294,6 +301,27 @@ function startGame(){
 }
 
 startButton.addEventListener("click", startGame);
+
+// Add event listeners for difficulty selection
+difficultyRadios.forEach(radio => {
+  radio.addEventListener('change', (event) => {
+    difficulty = event.target.value;
+  });
+});
+
+function playAudio() {
+  song.currentTime = 0;
+  song.play();
+}
+function playAudio2() {
+  song2.currentTime = 0;
+  song2.play();
+}
+
+function stopAudio(audio) {
+  audio.pause();
+  audio.currentTime = 0;
+}   
 
 
 // Please do not modify the code below.
